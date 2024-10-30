@@ -5,6 +5,7 @@ import { User } from './users/db/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TopicsModule } from './topics/topics.module';
 import { Topic } from './topics/db/topic.entity';
+import { AuthModule } from './auth/auth.module';
 
 const configService = new ConfigService();
 
@@ -23,6 +24,7 @@ const configService = new ConfigService();
     }),
     UsersModule,
     TopicsModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
