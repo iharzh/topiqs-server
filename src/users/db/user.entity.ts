@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Topic } from '../../topics/db/topic.entity';
 
 @Entity({
   name: 'users',
@@ -38,4 +45,7 @@ export class User {
     length: 255,
   })
   password: string;
+
+  @OneToMany(() => Topic, (topic) => topic.user)
+  topics: Topic[];
 }

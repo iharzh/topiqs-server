@@ -23,7 +23,7 @@ export class UsersService {
       throw new Error();
       await queryRunner.manager.save(user);
       await queryRunner.commitTransaction();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.log(`UsersService.create error: `, err);
       await queryRunner.rollbackTransaction();
     } finally {
@@ -33,5 +33,9 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
+  }
+
+  async findOne(email: string): Promise<User | null> {
+    return await this.usersRepository.findOne({ where: { email } });
   }
 }

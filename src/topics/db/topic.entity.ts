@@ -21,7 +21,6 @@ export class Topic {
   })
   description: string;
 
-  // @ts-expect-error - example taken from docs, no other side of relation required in this case
-  @ManyToOne(() => User, (user) => user.topics)
+  @ManyToOne(() => User, (user) => user.id)
   user: User;
 }

@@ -15,4 +15,8 @@ export class TopicsService {
   async findAll(): Promise<Topic[]> {
     return await this.topicRepository.find();
   }
+
+  async create(topic: Omit<Topic, 'id'>) {
+    return await this.topicRepository.save(topic);
+  }
 }
