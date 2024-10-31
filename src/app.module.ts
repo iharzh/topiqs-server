@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TopicsModule } from './topics/topics.module';
 import { Topic } from './topics/db/topic.entity';
 import { AuthModule } from './auth/auth.module';
+import { AuthController } from './auth/auth.controller';
 
 const configService = new ConfigService();
 
@@ -26,5 +27,6 @@ const configService = new ConfigService();
     TopicsModule,
     AuthModule,
   ],
+  controllers: [AuthController],
 })
 export class AppModule {}
