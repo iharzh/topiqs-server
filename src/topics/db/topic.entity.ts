@@ -21,6 +21,6 @@ export class Topic {
   })
   description: string;
 
-  @ManyToOne(() => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.topics)
   user: User;
 }

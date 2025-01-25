@@ -13,11 +13,12 @@ export class JwtRefreshStrategy extends PassportStrategy(
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: process.env.JWT_REFRESH_SECRET,
+      secretOrKey: process.env.JWT_REFRESH_SECRET || '',
     });
   }
 
   async validate(payload: JwtDTO) {
+    console.log('jwt-refresh strategy payload', payload);
     const authUser = await this.userService.findById(payload.sub);
     if (!authUser) {
       throw new UnauthorizedException();

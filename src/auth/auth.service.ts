@@ -3,12 +3,14 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/interfaces/user.interface';
 import { compare } from 'bcrypt';
+import { AuthRefreshTokenService } from './authRefreshToken.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private authRefreshTokenService: AuthRefreshTokenService,
   ) {}
 
   async validateUser(email: string, pass: string) {
@@ -31,12 +33,6 @@ export class AuthService {
   }
 
   async login(user: User) {
-    const payload = { sub: user.id };
-
-    return {
-      access_token: this.jwtService.sign(payload, {
-        secret: process.env.JWT_SECRET,
-      }),
-    };
+    return this.authRefreshTokenService.generateTokenPair(user);
   }
 }

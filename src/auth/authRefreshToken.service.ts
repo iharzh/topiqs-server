@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../users/interfaces/user.interface';
 import { RefreshToken as RefreshTokenEntity } from './db/refreshToken.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthRefreshTokenService {
@@ -11,6 +12,7 @@ export class AuthRefreshTokenService {
     @InjectRepository(RefreshTokenEntity)
     private authRefreshTokenRepository: Repository<RefreshTokenEntity>,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   async generateRefreshToken(
@@ -50,8 +52,11 @@ export class AuthRefreshTokenService {
     currentRefreshTokenExpiresAt?: Date,
   ) {
     const payload = { email: user.email, sub: user.id };
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, {
+        secret: this.configService.get('JWT_SECRET'),
+      }),
       refresh_token: await this.generateRefreshToken(
         user.id,
         currentRefreshToken,

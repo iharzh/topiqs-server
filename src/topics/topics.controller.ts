@@ -13,6 +13,7 @@ export class TopicsController {
     return this.topicsService.findAll();
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createTopicDto: CreateTopicDto) {
     return await this.topicsService.create(createTopicDto);
