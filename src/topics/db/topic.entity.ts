@@ -11,7 +11,7 @@ export class Topic {
   @Column({
     nullable: false,
     length: 255,
-    primary: true,
+    unique: true,
   })
   name: string;
 

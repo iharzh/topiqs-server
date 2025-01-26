@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import { User as UserEntity } from './users/db/user.entity';
 import { Topic as TopicEntity } from './topics/db/topic.entity';
+import { Question as QuestionEntity } from './questions/db/question.entity';
 import { AddDefaultUser1730047540711 } from './migrations/1730047540711-add-default-user';
 
 config();
@@ -16,7 +17,7 @@ export default new DataSource({
   username: configService.get('DB_USERNAME'),
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_NAME'),
-  entities: [UserEntity, TopicEntity],
+  entities: [UserEntity, TopicEntity, QuestionEntity],
   migrations: [AddDefaultUser1730047540711],
   logging: ['query', 'error'],
   logger: 'advanced-console',
