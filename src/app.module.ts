@@ -8,6 +8,8 @@ import { Topic as TopicEntity } from './topics/db/topic.entity';
 import { AuthModule } from './auth/auth.module';
 import { AuthController } from './auth/auth.controller';
 import { RefreshToken as RefreshTokenEntity } from './auth/db/refreshToken.entity';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 const configService = new ConfigService();
 
@@ -27,6 +29,12 @@ const configService = new ConfigService();
     UsersModule,
     TopicsModule,
     AuthModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
   controllers: [AuthController],
 })

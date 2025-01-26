@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Topic } from '../../topics/db/topic.entity';
 
 @Entity({
@@ -33,7 +27,7 @@ export class User {
   })
   username: string;
 
-  @PrimaryColumn({
+  @Column({
     nullable: false,
     unique: true,
     length: 255,

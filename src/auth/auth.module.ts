@@ -19,7 +19,7 @@ import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '300s' },
+      signOptions: { expiresIn: '30m' },
     }),
     TypeOrmModule.forFeature([RefreshTokenEntity]),
   ],

@@ -18,4 +18,6 @@ export default new DataSource({
   database: configService.get('DB_NAME'),
   entities: [UserEntity, TopicEntity],
   migrations: [AddDefaultUser1730047540711],
+  logging: ['query', 'error'],
+  logger: 'advanced-console',
 });
